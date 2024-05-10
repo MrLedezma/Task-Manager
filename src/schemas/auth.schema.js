@@ -26,13 +26,13 @@ export const loginSchema = z.object({
       required_error: "Email is required",
     })
     .email({
-      message: "Invalid email",
+      message: "Email is not valid",
     }),
   password: z
     .string({
       required_error: "Password is required",
     })
     .min(6, {
-      message: "Password must be at least 6 characters",
+      message: "Incorrect password",
     }),
 });
