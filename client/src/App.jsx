@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { TaskProvider } from "./context/TasksContext"; 
 
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,12 +10,15 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 
 import ProtectedRoute from "./ProtectedRoute";
+import { TaskProvider } from "./context/TasksContext";
+import { Navbar } from "./components/Navbar"; // Use named import
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
