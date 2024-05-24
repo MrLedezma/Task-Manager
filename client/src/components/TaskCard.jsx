@@ -5,28 +5,32 @@ function TaskCard({ task }) {
   const { deleteTask } = useTasks();
 
   return (
-    <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-      <header className="flex justify-between">
-        <h1 className="text-2xl font-bold">{task.title}</h1>
-        <div className="flex gap-x-2 items-center">
+    <div className="bg-gray-800 max-w-md w-full p-6 rounded-md shadow-md">
+      <div className="text-gray-200 mb-4 font-sans">
+        <p className="text-xl font-semibold mb-2">Title: {task.title}</p>
+        <p className="text-lg mb-2">Description: {task.description}</p>
+        <p className="text-lg mb-2">
+          Created Date: {new Date(task.date).toLocaleDateString()}
+        </p>
+      </div>
+      <footer className="flex justify-end">
+        <div className="flex gap-2">
+          <Link
+            to={`/tasks/${task._id}`}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+          >
+            Edit
+          </Link>
           <button
             onClick={() => {
               deleteTask(task._id);
             }}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
           >
             Delete
           </button>
-          <Link
-            to={`/tasks/${task._id}`}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Edit
-          </Link>
         </div>
-      </header>
-      <p className="text-slate-300">{task.description}</p>
-      <p>{new Date(task.date).toLocaleDateString()}</p>
+      </footer>
     </div>
   );
 }
