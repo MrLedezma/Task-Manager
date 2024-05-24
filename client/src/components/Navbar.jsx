@@ -1,44 +1,57 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export function Navbar() {
+function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
   console.log(isAuthenticated, user);
 
   return (
-    <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
-      <h1 className="text-2xl font-bold">
-        <Link to={isAuthenticated ? "/tasks" : "/"}>Task Manager</Link>
+    <nav className="bg-gray-800 my-3 mx-auto max-w-7xl flex justify-between items-center py-5 px-10 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold text-white">
+        <Link
+          to={isAuthenticated ? "/tasks" : "/"}
+          className="hover:text-indigo-400"
+        >
+          Task Manager
+        </Link>
       </h1>
-      <ul className="flex gap-x-2">
+      <ul className="flex gap-x-4 items-center">
         {isAuthenticated ? (
           <>
-            <li>Welcome {user.username}</li>
+            <li className="text-white font-semibold">
+              Welcome, <span className="text-indigo-400">{user.username}</span>
+            </li>
             <li>
               <Link
                 to="/add-task"
-                className="bg-indigo-500 px-4 py-1 rounded-sm"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
               >
                 Add Task
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => logout()}>
+              <button
+                onClick={() => logout()}
+                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+              >
                 Logout
-              </Link>
+              </button>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to="/login" className="bg-indigo-500 px-4 py-1 rounded-sm">
+              <Link
+                to="/login"
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+              >
                 Login
               </Link>
             </li>
             <li>
               <Link
                 to="/register"
-                className="bg-indigo-500 px-4 py-1 rounded-sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
               >
                 Register
               </Link>
@@ -49,3 +62,5 @@ export function Navbar() {
     </nav>
   );
 }
+
+export default Navbar;
